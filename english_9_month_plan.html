@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>مسیر ۹ ماهه انگلیسی | B1 تا B2</title>
+<style>
+:root{--bg:#f4f6f5;--card:#fff;--ink:#202a27;--muted:#687570;--line:#e1e8e4;--green:#247b66;--green2:#dff1ea;--gold:#f2c66d;--shadow:0 8px 28px #19352a0c}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Tahoma,Arial,sans-serif;line-height:1.8}
+header{background:#173f35;color:#fff;padding:28px max(18px,calc((100% - 1180px)/2));}
+header .eyebrow{color:#b8d8cc;font-size:13px}h1{font-size:clamp(23px,4vw,34px);margin:5px 0}header p{margin:4px 0;color:#d9e9e2}
+main{max-width:1180px;margin:22px auto;padding:0 16px}.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}.card{background:var(--card);border:1px solid var(--line);border-radius:17px;padding:18px;box-shadow:var(--shadow)}
+.stats{grid-column:span 3}.stats strong{font-size:26px;display:block;color:var(--green)}.stats span{font-size:13px;color:var(--muted)}
+.wide{grid-column:span 8}.side{grid-column:span 4}.full{grid-column:1/-1}
+h2{font-size:19px;margin:0 0 12px}h3{font-size:16px;margin:0 0 8px}
+.muted{color:var(--muted);font-size:13px}.bar{height:10px;background:#e9efec;border-radius:20px;overflow:hidden}.bar i{display:block;height:100%;background:var(--green);width:0%;transition:.2s}
+.controls{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:12px 0}
+select,input,button{font:inherit;border:1px solid var(--line);border-radius:10px;padding:9px 12px;background:#fff;color:var(--ink)}
+button{cursor:pointer;background:var(--green);color:white;border-color:var(--green)}button.secondary{background:#fff;color:var(--green)}button:focus,input:focus,select:focus{outline:2px solid #92cdb8;outline-offset:2px}
+.week-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:8px}
+.week-btn{text-align:right;background:#fff;color:var(--ink);border:1px solid var(--line);padding:10px}.week-btn.active{background:var(--green2);border-color:#8fc7b3;color:#145641}
+.day-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px}
+.day{background:#fff;color:var(--ink);border:1px solid var(--line);padding:9px 6px;text-align:center;min-height:72px}
+.day small{display:block;color:var(--muted);font-size:11px}.day.done{background:var(--green2);border-color:#8fc7b3}.day.selected{outline:2px solid var(--green)}
+.task{display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--line)}.task:last-child{border:0}
+.task input{margin-top:7px;accent-color:var(--green);width:18px;height:18px;flex-shrink:0}
+.task label{flex:1}.task b{display:block}.task small{color:var(--muted)}
+.pill{display:inline-block;background:#edf4f0;color:#276b59;border-radius:30px;padding:2px 9px;font-size:12px;margin:2px}
+.ref{display:block;padding:9px 0;border-bottom:1px solid var(--line);color:#176c58;text-decoration:none}.ref:last-child{border:0}
+.note{background:#fff8e8;border:1px solid #f2dfb3;border-radius:12px;padding:12px;font-size:13px}
+textarea{width:100%;min-height:90px;resize:vertical;border:1px solid var(--line);border-radius:10px;padding:10px;font:inherit}
+footer{text-align:center;color:var(--muted);font-size:12px;padding:25px}
+@media(max-width:800px){.stats{grid-column:span 6}.wide,.side{grid-column:1/-1}.day-grid{grid-template-columns:repeat(4,1fr)}}
+@media(max-width:430px){.stats{grid-column:span 6}.day-grid{grid-template-columns:repeat(3,1fr)}main{padding:0 10px}.card{padding:14px}}
+</style>
+</head>
+<body>
+<header><div class="eyebrow">PERSONAL ENGLISH LEARNING PLAN · 9 MONTHS</div><h1>مسیر انگلیسی تو؛ از B1 تا B2 کاربردی</h1><p>روزی ۶۰ دقیقه · ۳۹ هفته · سفر، ارتباط اجتماعی، طراحی بازی و کسب‌وکار</p></header>
+<main>
+<div class="grid">
+ <section class="card stats"><strong id="completed">۰</strong><span>روز تکمیل‌شده</span></section>
+ <section class="card stats"><strong id="percent">۰٪</strong><span>پیشرفت کل برنامه</span></section>
+ <section class="card stats"><strong>۶۰ دقیقه</strong><span>زمان هدف روزانه</span></section>
+ <section class="card stats"><strong>۹ ماه</strong><span>مسیر یادگیری</span></section>
+ <section class="card full"><h2>پیشرفت کلی</h2><div class="bar"><i id="progress"></i></div><p class="muted" id="progressText">هنوز روزی ثبت نشده است. از روز اول شروع کن.</p></section>
+ <section class="card full"><h2>انتخاب هفته</h2><div class="week-list" id="weeks"></div></section>
+ <section class="card wide">
+  <h2 id="weekTitle">هفته ۱</h2><p class="muted" id="weekDesc"></p>
+  <div class="controls"><label for="daySelect">رفتن به روز:</label><select id="daySelect"></select><button class="secondary" id="todayBtn">رفتن به امروزِ برنامه</button></div>
+  <div class="day-grid" id="days"></div>
+  <div style="height:16px"></div>
+  <div id="dayPanel"></div>
+ </section>
+ <aside class="card side">
+  <h2>منابع اصلی</h2>
+  <p class="muted">از همین منابع ثابت استفاده کن؛ لازم نیست هر هفته اپلیکیشن تازه‌ای اضافه کنی.</p>
+  <a class="ref" href="https://www.cambridge.org/gb/cambridgeenglish/catalog/grammar-vocabulary/grammar-use-5th-edition" target="_blank">English Grammar in Use <small>گرامر B1–B2</small></a>
+  <a class="ref" href="https://elt.oup.com/catalogue/items/global/vocabulary/oxford_word_skills/" target="_blank">Oxford Word Skills <small>واژگان موضوعی</small></a>
+  <a class="ref" href="https://www.bbc.co.uk/learningenglish" target="_blank">BBC Learning English <small>شنیدار و تلفظ</small></a>
+  <a class="ref" href="https://learnenglish.britishcouncil.org/" target="_blank">British Council LearnEnglish <small>تمرین مهارت‌ها</small></a>
+  <a class="ref" href="https://elllo.org/" target="_blank">ELLLO <small>شنیدن لهجه‌ها و مکالمه واقعی</small></a>
+  <a class="ref" href="https://www.gamedeveloper.com/" target="_blank">Game Developer <small>خواندن تخصصی بازی</small></a>
+  <a class="ref" href="https://www.youtube.com/@Gdconf" target="_blank">GDC YouTube <small>سخنرانی‌های طراحی بازی</small></a>
+  <a class="ref" href="https://dictionary.cambridge.org/" target="_blank">Cambridge Dictionary <small>معنی، مثال و تلفظ</small></a>
+  <a class="ref" href="https://youglish.com/" target="_blank">YouGlish <small>شنیدن واژه در جمله واقعی</small></a>
+  <div class="note" style="margin-top:14px"><b>روش کار با منابع:</b> لینک‌ها را باز کن، سطح B1–B2 یا موضوع همان روز را انتخاب کن. متن و ویدئو را فعالانه کار کن؛ فقط تماشا کردن، تمرین محسوب نمی‌شود.</div>
+ </aside>
+ <section class="card full">
+  <h2>دفتر ثبت یادگیری</h2><p class="muted">برای هر روز، جمله‌های جدید، اشتباهات پرتکرار و نکته‌ای که یاد گرفتی ثبت کن. اطلاعات در همین مرورگر ذخیره می‌شود.</p>
+  <textarea id="journal" placeholder="Today I learned... / اشتباه پرتکرار من امروز..."></textarea>
+  <div class="controls"><button id="saveNote">ذخیره یادداشت روز</button><span class="muted" id="saveStatus"></span></div>
+ </section>
+ <section class="card full"><h2>ارزیابی ماهانه</h2><div id="milestones"></div></section>
+</div>
+</main>
+<footer>این برنامه یک مسیر تمرینی و خودارزیابی است؛ رسیدن به B2 با آزمون تعیین سطح مستقل سنجیده می‌شود.</footer>
+<script>
+const themes = [
+["معرفی خود و علایق","Present Simple / be","Introduce yourself, your background, interests and current routine."],
+["زندگی روزمره","Present Simple vs Continuous","Describe a typical day and explain what is changing in your life."],
+["خاطرات و تجربه‌ها","Past Simple","Tell a story about a memorable day, project or trip."],
+["تجربه‌های زندگی","Present Perfect","Talk about things you have tried, learned and achieved."],
+["برنامه‌ها و اهداف","Future forms","Explain your plans for the next year and your reasons."],
+["سفر؛ فرودگاه و پرواز","Questions / polite requests","Role-play check-in, security, boarding and asking for help."],
+["هتل و اقامت","Countable / uncountable; some/any","Book a room, describe a problem and request a solution."],
+["رستوران و خرید","Would like / much / many","Order food, ask about prices and handle a wrong order."],
+["مسیر و حمل‌ونقل","Prepositions of place and movement","Ask for and give directions; explain a route."],
+["دوست‌یابی و گفت‌وگو","Question forms","Start small talk and ask natural follow-up questions."],
+["سلیقه و سرگرمی","Comparatives / superlatives","Compare films, games, places and hobbies."],
+["بیان نظر و موافقت","Linkers: because, although, however","Give an opinion and support it with reasons."],
+["معرفی بازی موردعلاقه","Relative clauses","Describe a game, its audience and distinctive features."],
+["قوانین و مکانیک بازی","Modals: must, have to, should","Explain rules, player actions and constraints."],
+["فرایند طراحی بازی","Passive voice","Explain how a prototype is tested and improved."],
+["هدف و انگیزه بازیکن","Gerunds and infinitives","Discuss player motivation, challenge and reward."],
+["حلقه گیم‌پلی","First and second conditionals","Explain what happens when players make different choices."],
+["تحلیل تجربه بازیکن","Adverbs / intensifiers","Evaluate usability, engagement and pacing."],
+["ارائه ایده بازی","Signposting language","Pitch a game concept in a clear 2-minute presentation."],
+["جلسه و همکاری تیمی","Reported speech","Report feedback and summarize a team discussion."],
+["مذاکره و تصمیم‌گیری","Second conditional / could","Discuss scope, budget, priorities and trade-offs."],
+["نوشتن ایمیل کاری","Formal vs informal language","Write a clear email asking for information or a meeting."],
+["ارائه و دفاع از تصمیم","Present perfect continuous","Explain the work done and justify design decisions."],
+["بازخورد دادن و گرفتن","Modals for suggestions","Give constructive feedback and respond professionally."],
+["مقاله و تحلیل تخصصی","Complex sentences","Read a game-design article and summarize its argument."],
+["روایت و تجربه بازیکن","Narrative tenses","Explain a player journey or narrative experience."],
+["طراحی سیستم و پیشرفت","Conditionals review","Describe progression, rewards and balancing."],
+["مستندسازی طراحی","Articles / determiners review","Write a concise game feature or mechanic description."],
+["ارائه به کارفرما","Persuasive language","Present a proposal and explain its value."],
+["جلسه کشف نیازمندی","Indirect questions","Ask a client about goals, audience, constraints and success."],
+["برآورد و محدوده پروژه","Future / modal review","Discuss timeline, deliverables, assumptions and risks."],
+["شبکه‌سازی در رویداد","Conversation strategies","Introduce yourself and continue a professional conversation."],
+["سفر مستقل و موقعیت دشوار","Repair strategies","Explain a problem, clarify misunderstanding and ask for help."],
+["بحث و استدلال","Concession / contrast","Discuss a design choice and respond to counterarguments."],
+["مصاحبه و معرفی حرفه‌ای","Tense review","Describe your experience, strengths and portfolio."],
+["مطالعه و خلاصه‌سازی","Academic vocabulary","Summarize a talk or article and identify its key claims."],
+["ارائه نهایی پروژه","Presentation structure","Deliver a 5–7 minute presentation about one of your games."],
+["شبیه‌سازی سفر و کار","Integrated review","Handle a travel scenario and a client meeting."],
+["جمع‌بندی و ارزیابی B2","Targeted grammar review","Complete a mock test, reflect and plan the next learning cycle."]
+];
+const dayNames=["شنبه","یکشنبه","دوشنبه","سه‌شنبه","چهارشنبه","پنجشنبه","جمعه"];
+const routines=[
+[["Grammar","۱۵ دقیقه","یک درس/بخش از مبحث هفته را بخوان؛ تمرین‌های همان بخش را حل کن."],["Vocabulary","۱۰ دقیقه","۵ عبارت موضوعی انتخاب کن؛ برای هرکدام یک جمله شخصی بساز."],["Speaking","۲۰ دقیقه","بدون متن ۲ تا ۳ دقیقه درباره موضوع هفته حرف بزن و صدایت را ضبط کن."],["Pronunciation","۱۵ دقیقه","۵ جمله از منبع صوتی را گوش بده، مکث کن و با همان ریتم تکرار کن."]],
+[["Listening","۲۰ دقیقه","یک فایل ۳ تا ۶ دقیقه‌ای را یک بار بدون متن و بار دوم با transcript گوش کن."],["Shadowing","۱۵ دقیقه","۳۰ تا ۶۰ ثانیه از فایل را جمله‌به‌جمله تقلید کن."],["Vocabulary","۱۰ دقیقه","۵ عبارت کاربردی از فایل استخراج و در فلش‌کارت ثبت کن."],["Speaking","۱۵ دقیقه","خلاصه فایل را با کلمات خودت تعریف کن."]],
+[["Reading","۲۰ دقیقه","یک متن کوتاه متناسب با موضوع هفته بخوان؛ ایده اصلی و ۳ نکته را پیدا کن."],["Vocabulary","۱۰ دقیقه","۵ واژه/عبارت را از متن انتخاب و با مثال یاد بگیر."],["Grammar","۱۵ دقیقه","ساختار هفته را در متن پیدا کن و ۵ جمله مشابه بساز."],["Writing","۱۵ دقیقه","یک پاراگراف ۸۰ تا ۱۲۰ کلمه‌ای بنویس."]],
+[["Grammar in use","۱۵ دقیقه","تمرین هدفمند مبحث هفته را انجام بده و اشتباهات را علامت بزن."],["Speaking","۲۰ دقیقه","به ۳ سؤال درباره موضوع هفته پاسخ بده؛ هر پاسخ ۱ دقیقه."],["Listening","۱۵ دقیقه","یک مکالمه کوتاه گوش کن و عبارت‌های اتصال‌دهنده را یادداشت کن."],["Pronunciation","۱۰ دقیقه","روی استرس کلمه، پایان واژه‌ها و اتصال کلمات تمرین کن."]],
+[["Game / Business English","۲۰ دقیقه","یک مفهوم طراحی بازی یا کسب‌وکار را با منبع تخصصی بخوان."],["Reading","۱۵ دقیقه","یک بخش کوتاه از مقاله را بخوان و ۵ اصطلاح تخصصی استخراج کن."],["Writing","۱۵ دقیقه","یک توضیح ۸۰ تا ۱۲۰ کلمه‌ای درباره مکانیک/پروژه بنویس."],["Speaking","۱۰ دقیقه","همان مفهوم را شفاهی و بدون خواندن متن توضیح بده."]],
+[["Partner Speaking","۲۰ دقیقه","با پارتنر مکالمه کن؛ ۵ دقیقه اول گفت‌وگوی آزاد و سپس نقش‌آفرینی موضوع هفته."],["Listening","۱۵ دقیقه","به پاسخ پارتنر توجه کن و ۳ عبارت طبیعی یادداشت کن."],["Vocabulary","۱۵ دقیقه","عبارت‌های هفته را مرور کن و با هرکدام جمله تازه بساز."],["Feedback","۱۰ دقیقه","۳ اشتباه پرتکرار و نسخه اصلاح‌شده آن‌ها را ثبت کن."]],
+[["Review","۲۰ دقیقه","فلش‌کارت‌ها و اشتباهات هفته را مرور کن؛ موارد سخت را دوباره تمرین کن."],["Mini test","۱۵ دقیقه","۱۰ سؤال گرامر/واژگان و یک درک مطلب کوتاه انجام بده."],["Free speaking","۱۵ دقیقه","درباره موضوع هفته ۳ تا ۵ دقیقه آزاد صحبت کن."],["Weekly reflection","۱۰ دقیقه","بنویس چه چیزی بهتر شد و هفته بعد چه چیزی نیاز به تمرین دارد."]]
+];
+const extra=[
+["معرفی و توصیف","BBC Learning English؛ British Council Speaking"],
+["روتین و تغییرات","British Council B1 Listening؛ Cambridge Dictionary"],
+["داستان کوتاه","BBC 6 Minute English؛ British Council Past events"],
+["تجربه و دستاورد","British Council B1 Listening؛ ELLLO"],
+["برنامه‌ریزی","BBC Learning English؛ British Council Future plans"],
+["فرودگاه","British Council Travel English؛ ELLLO"],
+["اقامت","British Council A2/B1 Listening؛ Cambridge Dictionary"],
+["غذا و خرید","British Council A2/B1 Listening؛ YouGlish"],
+["مسیرها","ELLLO Directions؛ British Council"],
+["Small talk","British Council Speaking؛ Tandem"],
+["مقایسه","BBC Learning English؛ British Council"],
+["نظر دادن","BBC 6 Minute English؛ British Council B1"],
+["Game review","Game Developer؛ GDC talks"],
+["Rules & mechanics","GDC؛ Cambridge Dictionary"],
+["Production process","Game Developer؛ GDC"],
+["Player motivation","Game Developer؛ GDC"],
+["Game loop","Game Developer؛ GDC"],
+["Player experience","Game Developer؛ GDC"],
+["Pitching","GDC talks؛ British Council Business English"],
+["Team communication","British Council Business English"],
+["Negotiation","British Council Business English"],
+["Email writing","British Council Business English"],
+["Presentations","British Council Business English؛ GDC"],
+["Feedback","British Council Business English"],
+["Critical reading","Game Studies؛ Game Developer"],
+["Narrative design","GDC؛ Game Developer"],
+["Systems design","GDC؛ Game Developer"],
+["Design documentation","Game Developer؛ Cambridge Dictionary"],
+["Client presentation","British Council Business English؛ GDC"],
+["Discovery meeting","British Council Business English"],
+["Project scope","British Council Business English"],
+["Networking","Tandem؛ GDC talks"],
+["Problem solving","ELLLO؛ British Council"],
+["Argumentation","BBC 6 Minute English؛ Game Studies"],
+["Interview","British Council Business English"],
+["Research summary","Game Studies؛ Game Developer"],
+["Final pitch","GDC؛ ضبط و بازبینی ارائه"],
+["Integrated scenarios","ELLLO؛ British Council؛ Tandem"],
+["B2 mock assessment","Cambridge English B2 First sample tests"]
+];
+const milestones=[
+["پایان ماه ۱","یک معرفی ۲ دقیقه‌ای ضبط کن؛ ۳۰ عبارت فعال را در مکالمه استفاده کن."],
+["پایان ماه ۲","مکالمه نقش‌آفرینی سفر: فرودگاه، هتل و رستوران؛ هرکدام بدون متن."],
+["پایان ماه ۳","ارزیابی B1: متن، شنیدار، گرامر و یک مکالمه ۵ دقیقه‌ای."],
+["پایان ماه ۴","یک بازی را در ۳ دقیقه معرفی و مکانیک اصلی‌اش را توضیح بده."],
+["پایان ماه ۵","یک ایمیل کاری و یک خلاصه ۱۵۰ کلمه‌ای بنویس."],
+["پایان ماه ۶","نمونه آزمون B2 و ارائه ۵ دقیقه‌ای؛ نقاط ضعف را مشخص کن."],
+["پایان ماه ۷","جلسه شبیه‌سازی با کارفرما: نیازسنجی، پیشنهاد و پاسخ به سؤال."],
+["پایان ماه ۸","یک مقاله تخصصی بخوان و ۵ دقیقه درباره استدلال نویسنده بحث کن."],
+["پایان ماه ۹","نمونه آزمون B2، مکالمه ۱۵ دقیقه‌ای و ارائه نهایی پروژه."]
+];
+let selectedWeek=0,selectedDay=0;
+const KEY="englishB2_9month_v1";
+let state=JSON.parse(localStorage.getItem(KEY)||'{"done":{},"notes":{}}');
+const $=id=>document.getElementById(id);
+const fa=n=>new Intl.NumberFormat('fa-IR').format(n);
+function save(){localStorage.setItem(KEY,JSON.stringify(state));renderStats()}
+function weekIndex(day){return Math.floor(day/7)}
+function renderStats(){let count=Object.values(state.done).filter(Boolean).length;$("completed").textContent=fa(count);$("percent").textContent=fa(Math.round(count/273*100))+"٪";$("progress").style.width=(count/273*100)+"%";$("progressText").textContent=`${fa(count)} روز از ۲۷۳ روز ثبت شده است.`}
+function renderWeeks(){ $("weeks").innerHTML="";for(let i=0;i<39;i++){let b=document.createElement("button");b.className="week-btn"+(i===selectedWeek?" active":"");b.innerHTML=`هفته ${fa(i+1)}<br><small>${themes[i][0]}</small>`;b.onclick=()=>{selectedWeek=i;selectedDay=0;renderAll()};$("weeks").append(b)}}
+function renderDays(){let base=selectedWeek*7;$("days").innerHTML="";$("daySelect").innerHTML="";for(let d=0;d<7;d++){let global=base+d;let b=document.createElement("button");b.className="day"+(state.done[global]?" done":"")+(d===selectedDay?" selected":"");b.innerHTML=`${dayNames[d]}<small>روز ${fa(global+1)}</small>${state.done[global]?"✓":""} `;b.onclick=()=>{selectedDay=d;renderDays();renderPanel()};$("days").append(b);let o=document.createElement("option");o.value=d;o.textContent=dayNames[d]+" – روز "+fa(global+1);$("daySelect").append(o)}$("daySelect").value=selectedDay;$("weekTitle").textContent=`هفته ${fa(selectedWeek+1)} · ${themes[selectedWeek][0]}`;$("weekDesc").textContent=`گرامر: ${themes[selectedWeek][1]} | هدف ارتباطی: ${themes[selectedWeek][2]}`}
+function renderPanel(){let global=selectedWeek*7+selectedDay;let routine=routines[selectedDay];let done=!!state.done[global];let h=`<h2>${dayNames[selectedDay]} · روز ${fa(global+1)}</h2><p>${themes[selectedWeek][2]}</p><div class="pill">${themes[selectedWeek][1]}</div><div class="pill">${extra[selectedWeek][0]}</div><h3 style="margin-top:14px">برنامه ۶۰ دقیقه‌ای امروز</h3>`;routine.forEach((t,i)=>{let id=`${global}_${i}`;h+=`<div class="task"><input type="checkbox" id="${id}" ${state.doneTasks?.[id]?"checked":""}><label for="${id}"><b>${t[0]} · ${t[1]}</b>${t[2]}</label></div>`});h+=`<h3 style="margin-top:15px">منابع پیشنهادی امروز</h3><p class="muted">${extra[selectedWeek][1]}</p><div class="note"><b>خروجی اجباری امروز:</b> حداقل یک خروجی قابل مشاهده بساز: صدای ضبط‌شده، پاراگراف، خلاصه یا فهرست عبارت‌ها. فقط تماشا یا خواندن کافی نیست.</div><div class="controls"><button id="completeDay">${done?"لغو تکمیل روز":"علامت‌گذاری روز به‌عنوان کامل"}</button></div>`;$("dayPanel").innerHTML=h;
+ routine.forEach((t,i)=>{let id=`${global}_${i}`;$(id).onchange=e=>{state.doneTasks=state.doneTasks||{};state.doneTasks[id]=e.target.checked;save()}})
+ $("completeDay").onclick=()=>{state.done[global]=!state.done[global];save();renderDays();renderPanel()};
+ $("journal").value=state.notes[global]||"";
+}
+function renderMilestones(){$("milestones").innerHTML=milestones.map((m,i)=>`<div class="task"><input type="checkbox" id="m${i}" ${state.milestones?.[i]?"checked":""}><label for="m${i}"><b>${m[0]}</b><small>${m[1]}</small></label></div>`).join("");milestones.forEach((m,i)=>$("m"+i).onchange=e=>{state.milestones=state.milestones||{};state.milestones[i]=e.target.checked;save()})}
+function renderAll(){renderWeeks();renderDays();renderPanel();renderMilestones();renderStats()}
+$("daySelect").onchange=e=>{selectedDay=+e.target.value;renderDays();renderPanel()};
+$("todayBtn").onclick=()=>{selectedWeek=0;selectedDay=0;renderAll()};
+$("saveNote").onclick=()=>{let g=selectedWeek*7+selectedDay;state.notes[g]=$("journal").value;save();$("saveStatus").textContent="یادداشت ذخیره شد."};
+renderAll();
+</script>
+</body></html>
